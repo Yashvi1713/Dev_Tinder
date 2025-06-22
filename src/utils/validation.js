@@ -15,4 +15,14 @@ const validateSignUpData = (req) =>{
 
 };
 
-module.exports = validateSignUpData;
+
+const validateEditProfileData = (req) => {
+    const allowedEditfields = ["firstName", "lastName", "emailId", "photoUrl", "gender", "age", "about", "skills"];
+    // every array method is used bcz it returns a boolean value and foreach does returns any value. Also includes returns a boolean as well so it send to every method which recognizes it and return value to variable also it will stop iterating once it gets false bool value from the loop
+    const isEditAllowed = Object.keys(req.body).every((fields)=>{
+        return allowedEditfields.includes(fields);
+    });
+    return isEditAllowed;
+}
+
+module.exports = {validateSignUpData, validateEditProfileData};

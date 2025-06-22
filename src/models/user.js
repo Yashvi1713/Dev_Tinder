@@ -37,7 +37,11 @@ const userSchema = new mongoose.Schema(
         }
       },
     },
+    about : {type : String},
+    skills: {type: []},
+    photoUrl : {type: String}
   },
+
   {
     timestamps: true,
   }
@@ -52,6 +56,8 @@ userSchema.methods.getJWT = async function(){
 userSchema.methods.securePassword = async function(passwordInputByUser){
   const hashPassword = this.password;
   const isPasswordValid = await bcrypt.compare(passwordInputByUser, hashPassword);
+  console.log(`password inside model ${isPasswordValid}`);
+  
   return isPasswordValid;
 }
 
