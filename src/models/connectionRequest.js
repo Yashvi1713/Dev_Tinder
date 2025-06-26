@@ -4,6 +4,7 @@ const connectionRequestSchema = new mongoose.Schema(
     {
     fromUserId : {
         type : mongoose.Schema.Types.ObjectId,
+        ref : "User", // Referencing to the User model using ref and getting all the desired attribute of the fromUserId
         required: true
     },
     toUserId : {
@@ -24,7 +25,7 @@ const connectionRequestSchema = new mongoose.Schema(
 }
 );
 
-connectionRequestSchema.index({fromUserId : 1, toUserId : 1})
+connectionRequestSchema.index({fromUserId : 1, toUserId : 1});
 
 // Validaiting if the user is not sending request to itself using the schema level middleware function pre
 // Also declaring function at the schema level always use named function and avoid arrow functions bcz in that this keyword doesn't work and we can use this keyword to address the existing instance of the schema 
